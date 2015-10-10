@@ -28,11 +28,12 @@ print("Data downloaded and cleaned...")
 ## data set name = powerData
 
 ## ***** START create plot *****
-## plot 2 is a plot of global active power by timeperiod
+## plot 2 is a plot of global active power by datetime
 
+png(file="plot2.png", width = 480, height= 480)
+plot(powerData$Time,powerData$Global_active_power, type="l", 
+     xlab="", ylab="Global Active Power (kilowatts)")
+dev.off()
 
-
-
-
-print("File plot1.png generated")
+print("File plot2.png generated")
 ## ***** END create plot *****
