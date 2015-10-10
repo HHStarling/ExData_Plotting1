@@ -28,16 +28,33 @@ print("Data downloaded and cleaned...")
 ## data set name = powerData
 
 ## ***** START create plot *****
-## plot 3 is a plot of each submetering by datetime
+## plot 4 is multiple plots in 2x2 grid
+
 ## making background transparent since orig files from github show transparent
-png(file="plot3.png", width = 480, height= 480, bg="transparent")
-with(powerData, plot(Time,Sub_metering_1, type="l", col="black",
-                     xlab="", ylab="Energy sub metering"))
-with(powerData, lines(Time, Sub_metering_2, col="red"))
-with(powerData, lines(Time, Sub_metering_3, col="blue"))
-legend(x="topright", col=c("black","red","blue"),
-       legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), lwd=1, lty=1)
+png(file="plot4.png", width = 480, height= 480, bg="transparent")
+par(mfcol=c(2,2))
+with(powerData, {
+  ## upper left
+  plot(Time,Global_active_power, type="l",
+                     xlab="", ylab="Global Active Power")
+  ## lower left
+  with(powerData, {
+    plot(Time,Sub_metering_1, type="l", col="black",
+         xlab="", ylab="Energy sub metering")
+    lines(Time, Sub_metering_2, col="red")
+    lines(Time, Sub_metering_3, col="blue")
+    legend(x="topright", col=c("black","red","blue"),
+           legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), lwd=1, lty=1, bty="n")
+  })
+  
+  ## upper right
+  plot(Time,Voltage, type="l", xlab="datetime", ylab="Voltage")
+  
+  ## lower right
+  plot(Time, Global_reactive_power, type="l",  xlab="datetime", ylab="Global_reactive_power")
+
+})
 dev.off()
 
-print("File plot3.png generated")
+print("File plot4.png generated")
 ## ***** END create plot *****
