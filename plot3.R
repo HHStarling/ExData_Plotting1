@@ -28,12 +28,16 @@ print("Data downloaded and cleaned...")
 ## data set name = powerData
 
 ## ***** START create plot *****
-## plot 2 is a plot of global active power by datetime
+## plot 3 is a plot of each submetering by datetime
 ## making background transparent since orig files from github show transparent
-png(file="plot2.png", width = 480, height= 480, bg="transparent")
-plot(powerData$Time,powerData$Global_active_power, type="l", 
-     xlab="", ylab="Global Active Power (kilowatts)")
+png(file="plot3.png", width = 480, height= 480, bg="transparent")
+with(powerData, plot(Time,Sub_metering_1, type="l", col="black",
+                     xlab="", ylab="Global Active Power (kilowatts)"))
+with(powerData, lines(Time, Sub_metering_2, col="red"))
+with(powerData, lines(Time, Sub_metering_3, col="blue"))
+legend(x="topright", col=c("black","red","blue"),
+       legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), lwd=1, lty=1)
 dev.off()
 
-print("File plot2.png generated")
+print("File plot3.png generated")
 ## ***** END create plot *****

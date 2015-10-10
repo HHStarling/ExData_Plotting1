@@ -35,7 +35,8 @@ print("Data downloaded and cleaned...")
 powerData$Global_active_power <- as.numeric(powerData$Global_active_power)
 
 ## generate histogram
-png(file="plot1.png", width = 480, height= 480)
+## making background transparent since orig files from github show transparent
+png(file="plot1.png", width = 480, height= 480, bg="transparent")
 hist(powerData$Global_active_power, 
      xlab="Global Active Power (kilowatts)", 
      main="Global Active Power", col="red", ylim = c(0,1200))
